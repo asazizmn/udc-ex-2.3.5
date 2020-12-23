@@ -11,14 +11,53 @@ class ListMovies extends Component {
     const listProfiles = this.props.profiles;
     const listUsers = this.props.users;
 
-
-
     return (
+
+      // solution 1
+      // - inefficient as list of profiles are traversed twice
+      // ==================================================================
+
+      // listMovies.map(movie => {
+
+      //   // reducer to help determine total favourites
+      //   const getTotalFavs = (total, profile) => (profile.favoriteMovieID == movie.id ? ++total : total);
+      //   const totalFavs = listProfiles.reduce(getTotalFavs, 0);
+
+      //   return (
+      //     <div>
+      //       <h2>{movie.name}</h2>
+
+      //       <p>
+      //         {
+      //           // determine which message to display, depending on total number of favourites
+      //           totalFavs ? "Liked By:" : "None of the current users liked this movie"
+      //         }
+      //       </p>
+
+      //       <ul>
+      //         {
+      //           listProfiles.map(profile => (
+      //             profile.favoriteMovieID == movie.id && <li key={profile.id}>{listUsers[profile.userID].name}</li>
+      //           ))
+      //         }
+      //       </ul>
+      //     </div>
+      //   )
+      // })
+
+
+      // solution 2
+      // ==================================================================
+
       listMovies.map(movie => {
 
-        // reducer to help determine total favourites
-        let getTotalFavs = (total, profile) => (profile.favoriteMovieID == movie.id ? ++total : total);
-        const totalFavs = listProfiles.reduce(getTotalFavs, 0);
+        // determine list of people who liked this movie
+        let favUsers = [];
+        for (const profile of listProfiles) {
+          if (profile.favoriteMovieID == movie.id) {
+            favUsers.push(listUsers[profile.userID].name);
+          }
+        }
 
         return (
           <div>
@@ -27,22 +66,25 @@ class ListMovies extends Component {
             <p>
               {
                 // determine which message to display, depending on total number of favourites
-                totalFavs ? "Liked By:" : "None of the current users liked this movie"
+                favUsers.length ? "Liked By:" : "None of the current users liked this movie"
               }
             </p>
 
             <ul>
               {
-                listProfiles.map(profile => (
-                  profile.favoriteMovieID == movie.id && <li key={profile.id}>{listUsers[profile.userID].name}</li>
-                ))
+                // simply print out all the users who liked this movie
+                favUsers.map((favUser, i) => {
+                  console.log('i', i);
+                  <li key={i}>{favUser}</li>
+                })
               }
             </ul>
           </div>
         )
-      })
-    )
 
+      })
+
+    )
   }
 }
 
