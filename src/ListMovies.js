@@ -75,7 +75,7 @@ class ListMovies extends Component {
                 // simply print out all the users who liked this movie
                 favUsers.map((favUser, i) => {
                   console.log('i', i);
-                  <li key={i}>{favUser}</li>
+                  return <li key={i}>{favUser}</li>
                 })
               }
             </ul>
