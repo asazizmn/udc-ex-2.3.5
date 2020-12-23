@@ -26,6 +26,6 @@ As you go about tackling this project, try to make the app *modular* by breaking
   <li>Autumn Green</li>
 </ul>
 
-<h2>Autumn Green</h2>
+<h2>Million Dollar Baby</h2>
 <p>None of the current users liked this movie</p>
 ```
