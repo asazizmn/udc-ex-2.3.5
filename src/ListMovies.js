@@ -51,13 +51,7 @@ class ListMovies extends Component {
 
       listMovies.map(movie => {
 
-        // determine list of people who liked this movie
-        let favListUsers = [];
-        for (const profile of listProfiles) {
-          if (profile.favoriteMovieID == movie.id) {
-            favListUsers.push({id: profile.userID, name: listUsers[profile.userID].name});
-          }
-        }
+        const favListProfiles = listProfiles.filter(profile => profile.favoriteMovieID == movie.id);
 
         return (
           <div key={movie.id}>
@@ -66,19 +60,18 @@ class ListMovies extends Component {
             <p>
               {
                 // determine which message to display, depending on total number of favourites
-                favListUsers.length ? "Liked By:" : "None of the current users liked this movie"
+                favListProfiles.length ? "Liked By:" : "None of the current users liked this movie"
               }
             </p>
 
             <ul>
               {
                 // simply print out all the users who liked this movie
-                favListUsers.map(favUserName => <li key={favUserName.id}>{favUserName.name}</li>)
+                favListProfiles.map(favUserName => <li key={favUserName.id}>{listUsers[favUserName.userID].name}</li>)
               }
             </ul>
           </div>
         )
-
       })
 
     )
