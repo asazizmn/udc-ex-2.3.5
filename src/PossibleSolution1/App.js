@@ -102,6 +102,9 @@ class App extends Component {
 
   Generally speaking, the following constructor code is used to prepare
   ... and create an object `usersByMovie` containing arrays of users per movie
+
+  Also, it should be noted that the constructor only runs once, and so the data
+  ... from this.props in most components should be retrieved in the render method instead
   */
   constructor(props) {
     super(props);
