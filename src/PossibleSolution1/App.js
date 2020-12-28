@@ -97,20 +97,40 @@ class App extends Component {
   The constructor is a "special method for creating and initializing an object."
   (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). The
   Component's constructor is the first thing that runs when the object is created.
+
+  It is used to help prepare and initialise upcoming code.
+
+  Generally speaking, the following constructor code is used to prepare
+  ... and create an object `usersByMovie` containing arrays of users per movie
   */
   constructor(props) {
     super(props);
+
+    // this will be an object containing arrays
+    // with users who favourited per movie
     this.usersByMovie = {};
 
     /*
     We can map the users by the movie they liked.
+    Please note that this traverses the `profiles` (not movies)
     */
     profiles.forEach(profile => {
+
+      // capturing the movie ID
+      // to be used as the property that contains an array of user IDs
       const movieID = profile.favoriteMovieID;
 
+      // check to see if the property with the movieID already exists
       if (this.usersByMovie[movieID]) {
+
+        // if it does, push the userID to the array that also already exists!
+        // please note that `push` works on arrays, not objects!!
         this.usersByMovie[movieID].push(profile.userID);
+
       } else {
+
+        // since property doesn't exist
+        // create it, along with the array containing the first element
         this.usersByMovie[movieID] = [profile.userID];
       }
     });

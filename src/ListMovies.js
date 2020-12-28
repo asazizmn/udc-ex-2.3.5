@@ -47,7 +47,10 @@ class ListMovies extends Component {
 
 
       // solution 2
-      // ==================================================================
+      // please note that in this solution, the listProfiles array
+      // ... is traversed multiple times, once per movie
+      // ... whereas suggested soltuion 1 only traverses this list once in the beginning
+      // ================================================================================
 
       listMovies.map(movie => {
 
